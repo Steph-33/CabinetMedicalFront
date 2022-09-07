@@ -9,6 +9,7 @@ import { PatientPageComponent } from './components/patient-page/patient-page.com
 import { InfirmierPageComponent } from './components/infirmier-page/infirmier-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
+import { DeplacementPageComponent } from './components/deplacement-page/deplacement-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
     PatientPageComponent,
     InfirmierPageComponent,
     HomeComponent,
-    TitleBarComponent
+    TitleBarComponent,
+    DeplacementPageComponent
   ],
   imports: [
     BrowserModule,
