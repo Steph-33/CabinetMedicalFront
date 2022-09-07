@@ -20,6 +20,12 @@
     flex-direction: column;
 }
 
+#updatePatient {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+}
+
 .patientField {
     width: 25%;
     text-align: center;

@@ -53,7 +53,7 @@ export class PatientService {
   Update a patient
   */
   updatePatient : (id:string, item: Patient) => Observable<Patient> = (id:string, item: Patient) => {
-    return this.http.patch<Patient>(`${this.domaine}/patients/${id}`, item);
+    return this.http.patch<Patient>(`${this.domaine}/patients/update/${id}`, item);
   }
 
 
