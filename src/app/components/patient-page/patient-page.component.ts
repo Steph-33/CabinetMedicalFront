@@ -17,11 +17,21 @@ export class PatientPageComponent implements OnInit {
   hidden_by_id: boolean = true;
   hidden_by_name: boolean = true;
   hidden_create: boolean = true;
+  hidden_update: boolean = true;
 
   newPatient: FormGroup;
-  
+  updatePatient: FormGroup;
+
   constructor(private service: PatientService) { 
     this.newPatient = new FormGroup({
+      nom: new FormControl('', Validators.required),
+      prenom: new FormControl('', Validators.required),
+      sexe: new FormControl('', [Validators.required, Validators.pattern('F|M')]),
+      dateNaissance: new FormControl('', [Validators.required, Validators.pattern('[0-3][0-9]/[0-1][0-9]/[1-2][0-9][0-9][0-9]')]),
+      adresse: new FormControl('', Validators.required),
+      numSecu: new FormControl('', [Validators.required, Validators.pattern('[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9] [0-9][0-9]')])
+    })
+    this.updatePatient = new FormGroup({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
       sexe: new FormControl('', [Validators.required, Validators.pattern('F|M')]),
@@ -118,8 +128,35 @@ export class PatientPageComponent implements OnInit {
     )
   }
 
+  submitUpdate(idUpdatedPatient: HTMLInputElement): void {
+    let newItem = new Patient();
+      newItem.nomPatient = this.updatePatient.controls['nom'].value;
+      newItem.prenomPatient = this.updatePatient.controls['prenom'].value;
+      newItem.dateNaissance = this.updatePatient.controls['dateNaissance'].value;
+      newItem.sexe = this.updatePatient.controls['sexe'].value;
+      newItem.adresse = this.updatePatient.controls['adresse'].value;
+      newItem.numeroSecu = this.updatePatient.controls['numSecu'].value;
+      newItem.active = true;
+
+    this.service.updatePatient(idUpdatedPatient.value, newItem).subscribe(
+      ok => {
+        this.getPatients()
+      },
+        err => {
+          console.error(err)
+      }
+    );
+    // Remise à 0 du formulaire
+    this.updatePatient.reset();
+    alert("Update");
+  }
+
   togglePatient():void { 
     this.hidden_create = !this.hidden_create;
+  }
+  
+  toggleUpdatePatient(id: HTMLInputElement):void { 
+    this.hidden_update = !this.hidden_update;
   }
 
   toggleAllPatients(): void {

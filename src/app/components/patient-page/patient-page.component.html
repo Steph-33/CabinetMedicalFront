@@ -61,7 +61,7 @@
           <input type="text" formControlName="nom"/>
         </div>
         <div>
-          <label>Prenom : </label>""
+          <label>Prenom : </label>
           <input type="text" formControlName="prenom"/>
         </div>
         <div>
@@ -84,6 +84,43 @@
       </form>
       
     </div>
+
+    <div id="updatePatient">
+      <button (click)="toggleUpdatePatient(idUpdatedPatient)">Mettre à jour un patient</button>
+      <label>Id à modifier</label>
+      <input type="text" #idUpdatedPatient />  
+
+      <div [hidden]="hidden_update">
+        <form id="formUpdatePatient" [formGroup]="updatePatient" (ngSubmit)="submitUpdate(idUpdatedPatient)">
+          <div>
+            <label>Nom : </label>
+            <input type="text" formControlName="nom"/>
+          </div>
+          <div>
+            <label>Prenom : </label>
+            <input type="text" formControlName="prenom"/>
+          </div>
+          <div>
+            <label>Sexe (F ou M) : </label>
+            <input type="text" formControlName="sexe"/>
+          </div>
+          <div>
+            <label>Date de naissance : </label>
+            <input type="text" formControlName="dateNaissance"/>
+          </div>
+          <div>
+            <label>Adresse : </label>
+            <input type="text" formControlName="adresse"/>
+          </div>
+          <div>
+            <label>Numéro de sécu : </label>
+            <input type="text" formControlName="numSecu"/>
+          </div>
+          <button type="submit" [disabled]="!updatePatient.valid">Valider</button>
+        </form>
+        
+      </div>
+
 
   </div>
 
