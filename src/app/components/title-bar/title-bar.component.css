@@ -1,0 +1,21 @@
+#titleBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    height: 72px;
+    width: 100%;
+    background-color:#030c38;
+    top: 0;
+    left: 0;
+    align-items: center;
+}
+
+#logoSport {
+    margin-left: 20px;
+    width: 30%;
+}
+
+#logoSport img{
+    width: 30%;
+}

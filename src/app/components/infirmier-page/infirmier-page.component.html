@@ -1,0 +1,50 @@
+<div id="infirmierPage">
+
+  <div id="allInfirmiers">
+    <button (click)="toggleAllInfirmiers()">Afficher tous les infirmiers</button>
+
+    <div [hidden]="hidden_all_infirmiers">
+      <div *ngFor="let infirmier of infirmiers">
+        <!--<div *ngIf="infirmier.active"> -->
+        <div>
+          <fieldset class="infirmierField" [ngClass]="{'activeClass': infirmier.active, 'inactiveClass': !infirmier.active}"><legend>{{infirmier.id}}</legend>
+            {{infirmier.nom}} {{infirmier.prenom}} <br/>
+            Téléphone Pro : {{infirmier.telPro}} <br/>
+            Téléphone Mobile : {{infirmier.telMobile}} <br/>
+            Téléphone Fixe : {{infirmier.telFixe}} <br/>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="byId">
+    <button (click)="getInfirmierById(idInfirmier)">Afficher par id</button>
+    <input type="text" #idInfirmier />
+
+    <div [hidden]="hidden_by_id">
+      <fieldset class="infirmierField" [ngClass]="{'activeClass': infirmierId.active, 'inactiveClass': !infirmierId.active}"><legend>{{infirmierId.id}}</legend>
+        {{infirmierId.nom}} {{infirmierId.prenom}} <br/>
+        Téléphone Pro : {{infirmierId.telPro}} <br/>
+        Téléphone Mobile : {{infirmierId.telMobile}} <br/>
+        Téléphone Fixe : {{infirmierId.telFixe}} <br/>
+      </fieldset>
+    </div>
+  </div>
+
+  <div id="byName">
+    <button (click)="getInfirmierByName(nameInfirmier)">Afficher par nom</button>
+    <input type="text" #nameInfirmier />
+
+    <div [hidden]="hidden_by_name">
+      <fieldset class="infirmierField" [ngClass]="{'activeClass': infirmierName.active, 'inactiveClass': !infirmierName.active}"><legend>{{infirmierName.nom}}</legend>
+        {{infirmierName.prenom}} <br/>
+        Id: {{infirmierName.id}} <br/>
+        Téléphone Pro : {{infirmierName.telPro}} <br/>
+        Téléphone Mobile : {{infirmierName.telMobile}} <br/>
+        Téléphone Fixe : {{infirmierName.telFixe}} <br/>
+      </fieldset>
+    </div>
+  </div>
+
+</div>
