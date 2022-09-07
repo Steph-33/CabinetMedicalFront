@@ -28,16 +28,33 @@ export class PatientService {
     return this.http.get<Patient>(`${this.domaine}/patients/${id}`);
   }
 
+  /*
+  Get patient by name
+  */
   getPatientByName : (name: string) => Observable<Patient> = (name: string) => {
     return this.http.get<Patient>(`${this.domaine}/patients/name/${name}`);
   }
 
+  /*
+  Create a patient
+  */
   createPatient : (item: Patient) => Observable<Observable<Patient>> = (item: Patient) => {
     return this.http.post<Observable<Patient>>(`${this.domaine}/patients`, item);
   }
 
-  deletePatient : (id: string) => Observable<Patient> = (id: string) => {
-    return this.http.delete<Patient>(`${this.domaine}/patients/${id}`);
+  /*
+  Delete a patient <-> change its attribute active to false
+  */
+  deletePatient = (id: string|undefined) => {
+    return this.http.patch(`${this.domaine}/patients/${id}`, "");
   }
+
+  /*
+  Update a patient
+  */
+  updatePatient : (id:string, item: Patient) => Observable<Patient> = (id:string, item: Patient) => {
+    return this.http.patch<Patient>(`${this.domaine}/patients/${id}`, item);
+  }
+
 
 }
