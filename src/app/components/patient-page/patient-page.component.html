@@ -12,7 +12,8 @@
             Sexe : {{patient.sexe}} <br/>
             Né(e) le : {{patient.dateNaissance}} <br/>
             Adresse : {{patient.adresse}} <br/>
-            Numéro de secu : {{patient.numeroSecu}}
+            Numéro de secu : {{patient.numeroSecu}} <br/>
+            <button class="deleteButton">X</button>
           </fieldset>
         </div>
       </div>
@@ -45,8 +46,45 @@
         Sexe : {{patientName.sexe}} <br/>
         Né(e) le : {{patientName.dateNaissance}} <br/>
         Adresse : {{patientName.adresse}} <br/>
-        Numéro de secu : {{patientName.numeroSecu}}
+        Numéro de secu : {{patientName.numeroSecu}} 
       </fieldset>
     </div>
   </div>
+
+  <div id="createPatient">
+    <button (click)="togglePatient()">Créer un patient</button>
+
+    <div [hidden]="hidden_create">
+      <form id="formNewPatient" [formGroup]="newPatient" (ngSubmit)="submitCreate()">
+        <div>
+          <label>Nom : </label>
+          <input type="text" formControlName="nom"/>
+        </div>
+        <div>
+          <label>Prenom : </label>""
+          <input type="text" formControlName="prenom"/>
+        </div>
+        <div>
+          <label>Sexe (F ou M) : </label>
+          <input type="text" formControlName="sexe"/>
+        </div>
+        <div>
+          <label>Date de naissance : </label>
+          <input type="text" formControlName="dateNaissance"/>
+        </div>
+        <div>
+          <label>Adresse : </label>
+          <input type="text" formControlName="adresse"/>
+        </div>
+        <div>
+          <label>Numéro de sécu : </label>
+          <input type="text" formControlName="numSecu"/>
+        </div>
+        <button type="submit" [disabled]="!newPatient.valid">Valider</button>
+      </form>
+      
+    </div>
+
+  </div>
+
 </div>

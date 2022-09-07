@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Patient } from 'src/app/models/patient.model';
 import { PatientService } from 'src/app/services/patient/patient.service';
 
@@ -15,8 +16,20 @@ export class PatientPageComponent implements OnInit {
   hidden_all_patients: boolean = true;
   hidden_by_id: boolean = true;
   hidden_by_name: boolean = true;
+  hidden_create: boolean = true;
 
-  constructor(private service: PatientService) { }
+  newPatient: FormGroup;
+  
+  constructor(private service: PatientService) { 
+    this.newPatient = new FormGroup({
+      nom: new FormControl('', Validators.required),
+      prenom: new FormControl('', Validators.required),
+      sexe: new FormControl('', [Validators.required, Validators.pattern('F|M')]),
+      dateNaissance: new FormControl('', [Validators.required, Validators.pattern('[0-3][0-9]/[0-1][0-9]/[1-2][0-9][0-9][0-9]')]),
+      adresse: new FormControl('', Validators.required),
+      numSecu: new FormControl('', [Validators.required, Validators.pattern('[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9] [0-9][0-9]')])
+    })
+  }
 
   ngOnInit(): void {
     this.getPatients();
@@ -73,7 +86,34 @@ export class PatientPageComponent implements OnInit {
     }
   }
 
+  submitCreate(): void {
+    let newItem = new Patient();
+      newItem.nomPatient = this.newPatient.controls['nom'].value;
+      newItem.prenomPatient = this.newPatient.controls['prenom'].value;
+      newItem.dateNaissance = this.newPatient.controls['dateNaissance'].value;
+      newItem.sexe = this.newPatient.controls['sexe'].value;
+      newItem.adresse = this.newPatient.controls['adresse'].value;
+      newItem.numeroSecu = this.newPatient.controls['numSecu'].value;
+      newItem.active = true;
+
+    this.service.createPatient(newItem).subscribe(
+      res => {
+        this.getPatients()
+      }, err => {
+        console.error(err)
+      })
+
+      // Remise à 0 du formulaire
+    this.newPatient.reset();
+  }
   
+  deletePatient(): void {
+    
+  }
+
+  togglePatient():void { 
+    this.hidden_create = !this.hidden_create;
+  }
 
   toggleAllPatients(): void {
     this.hidden_all_patients = !this.hidden_all_patients;
