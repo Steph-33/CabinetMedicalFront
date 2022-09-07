@@ -1,0 +1,31 @@
+#navbar {
+    width: 50%;
+    height: 3em;
+    position: relative;
+    top: 8em;
+    margin: auto;
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: stretch;
+}
+
+a {  
+    color:  #64a6f2;
+    font-weight: bold;   
+    width: 100%;
+    background-color: #030c38;
+    border-radius: 7px;
+    padding-top: 9px;
+    border: solid 1px;
+    border-color:  #64a6f2;
+    box-shadow: 2px 5px;
+}
+
+a:hover {
+    color: #030c38;
+    background-color: #64a6f2;
+    border: solid 1px silver;
+    text-decoration: none;
+    box-shadow: 2px 5px;
+}

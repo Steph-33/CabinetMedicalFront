@@ -1,4 +1,4 @@
-#patientPage {
+#infirmierPage {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -15,7 +15,7 @@
     flex-direction: column;
 }
 
-.patientField {
+.infirmierField {
     width: 25%;
     text-align: center;
     margin-bottom: 5px;
