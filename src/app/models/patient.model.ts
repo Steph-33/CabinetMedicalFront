@@ -6,5 +6,5 @@ export class Patient {
     public numeroSecu?: string;
     public nomPatient?: string;
     public prenomPatient?: string;
-
+    public active?: boolean;
 }

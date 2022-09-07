@@ -1,0 +1,53 @@
+<div id="patientPage">
+
+  <div id="allPatients">
+    <button (click)="toggleAllPatients()">Afficher tous les patients</button>
+
+    <div [hidden]="hidden_all_patients">
+      <div *ngFor="let patient of patients">
+        <!--<div *ngIf="patient.active"> -->
+        <div>
+          <fieldset class="patientField" [ngClass]="{'activeClass': patient.active, 'inactiveClass': !patient.active}"><legend>{{patient.id}}</legend>
+            {{patient.nomPatient}} {{patient.prenomPatient}} <br/>
+            Sexe : {{patient.sexe}} <br/>
+            Né(e) le : {{patient.dateNaissance}} <br/>
+            Adresse : {{patient.adresse}} <br/>
+            Numéro de secu : {{patient.numeroSecu}}
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="byId">
+    <button (click)="getPatientById(idPatient)">Afficher par id</button>
+    <input type="text" #idPatient />
+
+    <div [hidden]="hidden_by_id">
+      <fieldset class="patientField" [ngClass]="{'activeClass': patientId.active, 'inactiveClass': !patientId.active}"><legend>{{patientId.id}}</legend>
+        {{patientId.nomPatient}} {{patientId.prenomPatient}} <br/>
+        Sexe : {{patientId.sexe}} <br/>
+        Né(e) le : {{patientId.dateNaissance}} <br/>
+        Adresse : {{patientId.adresse}} <br/>
+        Numéro de secu : {{patientId.numeroSecu}}
+      </fieldset>
+    </div>
+  </div>
+
+  <div id="byName">
+    <button (click)="getPatientByName(namePatient)">Afficher par nom</button>
+    <input type="text" #namePatient />
+
+    <div [hidden]="hidden_by_name">
+      <fieldset class="patientField" [ngClass]="{'activeClass': patientName.active, 'inactiveClass': !patientName.active}"><legend>{{patientName.nomPatient}}</legend>
+        {{patientName.prenomPatient}} <br/>
+        Id: {{patientName.id}} <br/>
+        Sexe : {{patientName.sexe}} <br/>
+        Né(e) le : {{patientName.dateNaissance}} <br/>
+        Adresse : {{patientName.adresse}} <br/>
+        Numéro de secu : {{patientName.numeroSecu}}
+      </fieldset>
+    </div>
+  </div>
+
+</div>
