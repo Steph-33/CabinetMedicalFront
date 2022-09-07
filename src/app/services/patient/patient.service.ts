@@ -36,5 +36,8 @@ export class PatientService {
     return this.http.post<Observable<Patient>>(`${this.domaine}/patients`, item);
   }
 
+  deletePatient : (id: string) => Observable<Patient> = (id: string) => {
+    return this.http.delete<Patient>(`${this.domaine}/patients/${id}`);
+  }
 
 }

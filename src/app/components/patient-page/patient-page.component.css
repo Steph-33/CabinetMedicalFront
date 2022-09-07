@@ -14,6 +14,11 @@
     flex-direction: column;
 }
 
+#createPatient {
+    display: flex;
+    flex-direction: column;
+}
+
 .patientField {
     width: 25%;
     text-align: center;
@@ -34,4 +39,22 @@ input {
 
 .inactiveClass {
     background-color: lightgray;
+}
+
+#formNewPatient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.deleteButton {
+    margin-top: 1em;
+    width: 3em;
+    height: 2em;
+    background-color: lightcoral;
+    color: white;
+    border-radius: 5px;
+}
+.deleteButton:hover {
+    background-color: red;
 }
