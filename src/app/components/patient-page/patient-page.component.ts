@@ -107,8 +107,15 @@ export class PatientPageComponent implements OnInit {
     this.newPatient.reset();
   }
   
-  deletePatient(): void {
-    
+  deletePatient(id: string|undefined): void {
+    this.service.deletePatient(id).subscribe(
+      ok => {
+        this.getPatients();
+      },
+      err => {
+        console.error(err)
+      }
+    )
   }
 
   togglePatient():void { 

@@ -13,7 +13,7 @@
             Né(e) le : {{patient.dateNaissance}} <br/>
             Adresse : {{patient.adresse}} <br/>
             Numéro de secu : {{patient.numeroSecu}} <br/>
-            <button class="deleteButton">X</button>
+            <button class="deleteButton" (click)="deletePatient(patient.id)">X</button>
           </fieldset>
         </div>
       </div>
