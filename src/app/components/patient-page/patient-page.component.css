@@ -1,0 +1,37 @@
+#patientPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#byId {
+    display: flex;
+    flex-direction: column;
+}
+
+#byName {
+    display: flex;
+    flex-direction: column;
+}
+
+.patientField {
+    width: 25%;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+button {
+    margin-bottom: 1em;
+}
+
+input {
+    margin-bottom: 2em;
+}
+
+.activeClass {
+    background-color:lightcyan;
+}
+
+.inactiveClass {
+    background-color: lightgray;
+}
