@@ -5,50 +5,30 @@
 
     <div *ngIf="!hidden_all_patients" id="hiddenPartAll">
       <div *ngFor="let patient of patients">
-        <!--<div *ngIf="patient.active"> -->
         <div class="field">
-          <fieldset class="patientField" [ngClass]="{'activeClassAll': patient.active, 'inactiveClassAll': !patient.active}"><legend>{{patient.id}}</legend>
-            {{patient.nomPatient}} {{patient.prenomPatient}} <br/>
-            Sexe : {{patient.sexe}} <br/>
-            Né(e) le : {{patient.dateNaissance}} <br/>
-            Adresse : {{patient.adresse}} <br/>
-            Numéro de secu : {{patient.numeroSecu}} <br/>
-            <button class="deleteButton" (click)="deletePatient(patient.id)">X</button>
-          </fieldset>
+           <app-generic-fieldset-patient type="all" [patient]="patient" (click)="deletePatient(patient.id)"></app-generic-fieldset-patient>
         </div>
       </div>
     </div>
+    
   </div>
 
   <div id="displayBy">
     <div id="byId">
       <app-generic-button (click)="getPatientById(idPatient)" title="Afficher par id"></app-generic-button>
-      <input type="text" #idPatient />
+      <input type="text" #idPatient placeholder="Id du patient recherché"/>
 
       <div [hidden]="hidden_by_id">
-        <fieldset class="patientField" [ngClass]="{'activeClass': patientId.active, 'inactiveClass': !patientId.active}"><legend>{{patientId.id}}</legend>
-          {{patientId.nomPatient}} {{patientId.prenomPatient}} <br/>
-          Sexe : {{patientId.sexe}} <br/>
-          Né(e) le : {{patientId.dateNaissance}} <br/>
-          Adresse : {{patientId.adresse}} <br/>
-          Numéro de secu : {{patientId.numeroSecu}}
-        </fieldset>
+        <app-generic-fieldset-patient type="byId" [patient]="patientId"></app-generic-fieldset-patient>
       </div>
     </div>
 
     <div id="byName">
       <app-generic-button (click)="getPatientByName(namePatient)" title="Afficher par nom"></app-generic-button>
-      <input type="text" #namePatient />
-
+      <input type="text" #namePatient placeholder="Nom du patient recherché"/>
+   
       <div [hidden]="hidden_by_name">
-        <fieldset class="patientField" [ngClass]="{'activeClass': patientName.active, 'inactiveClass': !patientName.active}"><legend>{{patientName.nomPatient}}</legend>
-          {{patientName.prenomPatient}} <br/>
-          Id: {{patientName.id}} <br/>
-          Sexe : {{patientName.sexe}} <br/>
-          Né(e) le : {{patientName.dateNaissance}} <br/>
-          Adresse : {{patientName.adresse}} <br/>
-          Numéro de secu : {{patientName.numeroSecu}} 
-        </fieldset>
+        <app-generic-fieldset-patient type="byName" [patient]="patientName"></app-generic-fieldset-patient>
       </div>
     </div>
   </div>
@@ -90,7 +70,7 @@
     <div id="updatePatient">
       <app-generic-button (click)="toggleUpdatePatient()" title="Mettre à jour un patient"></app-generic-button>
       <label>Id à modifier</label>
-      <input type="text" #idUpdatedPatient />  
+      <input type="text" #idUpdatedPatient placeholder="Id du patient à modifier"/>  
 
       <div [hidden]="hidden_update">
         <form id="formUpdatePatient" [formGroup]="updatePatient" (ngSubmit)="submitUpdate(idUpdatedPatient)">
