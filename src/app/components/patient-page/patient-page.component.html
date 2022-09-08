@@ -43,27 +43,27 @@
     <div [hidden]="hidden_create">
       <form id="formNewPatient" [formGroup]="newPatientForm" (ngSubmit)="submitCreate()">
         <div>
-          <label>Nom : </label>
+          <label class="labelInForm">Nom : </label>
           <input type="text" formControlName="nom"/>
         </div>
         <div>
-          <label>Prenom : </label>
+          <label class="labelInForm">Prenom : </label>
           <input type="text" formControlName="prenom"/>
         </div>
         <div>
-          <label>Sexe (F ou M) : </label>
+          <label class="labelInForm">Sexe (F ou M) : </label>
           <input type="text" formControlName="sexe"/>
         </div>
         <div>
-          <label>Date de naissance : </label>
+          <label class="labelInForm">Date de naissance : </label>
           <input type="text" formControlName="dateNaissance"/>
         </div>
         <div>
-          <label>Adresse : </label>
+          <label class="labelInForm">Adresse : </label>
           <input type="text" formControlName="adresse"/>
         </div>
         <div>
-          <label>Numéro de sécu : </label>
+          <label class="labelInForm">Numéro de sécu : </label>
           <input type="text" formControlName="numSecu"/>
         </div>
         <button type="submit" [disabled]="!newPatientForm.valid">Valider</button>
@@ -79,27 +79,27 @@
       <div [hidden]="hidden_update">
         <form id="formUpdatePatient" [formGroup]="updatePatientForm" (ngSubmit)="submitUpdate(idUpdatedPatient)">
           <div>
-            <label>Nom : </label>
+            <label class="labelInForm">Nom : </label>
             <input type="text" formControlName="nom"/>
           </div>
           <div>
-            <label>Prenom : </label>
+            <label class="labelInForm">Prenom : </label>
             <input type="text" formControlName="prenom"/>
           </div>
           <div>
-            <label>Sexe (F ou M) : </label>
+            <label class="labelInForm">Sexe (F ou M) : </label>
             <input type="text" formControlName="sexe"/>
           </div>
           <div>
-            <label>Date de naissance : </label>
+            <label class="labelInForm">Date de naissance : </label>
             <input type="text" formControlName="dateNaissance"/>
           </div>
           <div>
-            <label>Adresse : </label>
+            <label class="labelInForm">Adresse : </label>
             <input type="text" formControlName="adresse"/>
           </div>
           <div>
-            <label>Numéro de sécu : </label>
+            <label class="labelInForm">Numéro de sécu : </label>
             <input type="text" formControlName="numSecu"/>
           </div>
           <button type="submit" [disabled]="!updatePatientForm.valid">Valider</button>
@@ -108,6 +108,5 @@
       </div>
 
   </div>
-
 
 </div>
