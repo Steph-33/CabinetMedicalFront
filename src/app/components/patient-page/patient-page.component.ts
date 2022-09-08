@@ -148,14 +148,14 @@ export class PatientPageComponent implements OnInit {
     );
     // Remise à 0 du formulaire
     this.updatePatient.reset();
-    alert("Update");
+    idUpdatedPatient.value = '';
   }
 
   togglePatient():void { 
     this.hidden_create = !this.hidden_create;
   }
   
-  toggleUpdatePatient(id: HTMLInputElement):void { 
+  toggleUpdatePatient():void { 
     this.hidden_update = !this.hidden_update;
   }
 

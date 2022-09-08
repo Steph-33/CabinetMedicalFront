@@ -1,12 +1,13 @@
 <div id="patientPage">
 
   <div id="allPatients">
-    <button (click)="toggleAllPatients()">Afficher tous les patients</button>
+    <app-generic-button (click)="toggleAllPatients()" title="Afficher tous les patients"></app-generic-button>
 
-    <div [hidden]="hidden_all_patients">
+    <div *ngIf="!hidden_all_patients" id="hiddenPartAll">
+    <!--<div [hidden]="hidden_all_patients" id="hiddenPartAll">-->
       <div *ngFor="let patient of patients">
         <!--<div *ngIf="patient.active"> -->
-        <div>
+        <div class="field">
           <fieldset class="patientField" [ngClass]="{'activeClass': patient.active, 'inactiveClass': !patient.active}"><legend>{{patient.id}}</legend>
             {{patient.nomPatient}} {{patient.prenomPatient}} <br/>
             Sexe : {{patient.sexe}} <br/>
@@ -20,39 +21,41 @@
     </div>
   </div>
 
-  <div id="byId">
-    <button (click)="getPatientById(idPatient)">Afficher par id</button>
-    <input type="text" #idPatient />
+  <div id="displayBy">
+    <div id="byId">
+      <app-generic-button (click)="getPatientById(idPatient)" title="Afficher par id"></app-generic-button>
+      <input type="text" #idPatient />
 
-    <div [hidden]="hidden_by_id">
-      <fieldset class="patientField" [ngClass]="{'activeClass': patientId.active, 'inactiveClass': !patientId.active}"><legend>{{patientId.id}}</legend>
-        {{patientId.nomPatient}} {{patientId.prenomPatient}} <br/>
-        Sexe : {{patientId.sexe}} <br/>
-        Né(e) le : {{patientId.dateNaissance}} <br/>
-        Adresse : {{patientId.adresse}} <br/>
-        Numéro de secu : {{patientId.numeroSecu}}
-      </fieldset>
+      <div [hidden]="hidden_by_id">
+        <fieldset class="patientField" [ngClass]="{'activeClass': patientId.active, 'inactiveClass': !patientId.active}"><legend>{{patientId.id}}</legend>
+          {{patientId.nomPatient}} {{patientId.prenomPatient}} <br/>
+          Sexe : {{patientId.sexe}} <br/>
+          Né(e) le : {{patientId.dateNaissance}} <br/>
+          Adresse : {{patientId.adresse}} <br/>
+          Numéro de secu : {{patientId.numeroSecu}}
+        </fieldset>
+      </div>
     </div>
-  </div>
 
-  <div id="byName">
-    <button (click)="getPatientByName(namePatient)">Afficher par nom</button>
-    <input type="text" #namePatient />
+    <div id="byName">
+      <app-generic-button (click)="getPatientByName(namePatient)" title="Afficher par nom"></app-generic-button>
+      <input type="text" #namePatient />
 
-    <div [hidden]="hidden_by_name">
-      <fieldset class="patientField" [ngClass]="{'activeClass': patientName.active, 'inactiveClass': !patientName.active}"><legend>{{patientName.nomPatient}}</legend>
-        {{patientName.prenomPatient}} <br/>
-        Id: {{patientName.id}} <br/>
-        Sexe : {{patientName.sexe}} <br/>
-        Né(e) le : {{patientName.dateNaissance}} <br/>
-        Adresse : {{patientName.adresse}} <br/>
-        Numéro de secu : {{patientName.numeroSecu}} 
-      </fieldset>
+      <div [hidden]="hidden_by_name">
+        <fieldset class="patientField" [ngClass]="{'activeClass': patientName.active, 'inactiveClass': !patientName.active}"><legend>{{patientName.nomPatient}}</legend>
+          {{patientName.prenomPatient}} <br/>
+          Id: {{patientName.id}} <br/>
+          Sexe : {{patientName.sexe}} <br/>
+          Né(e) le : {{patientName.dateNaissance}} <br/>
+          Adresse : {{patientName.adresse}} <br/>
+          Numéro de secu : {{patientName.numeroSecu}} 
+        </fieldset>
+      </div>
     </div>
   </div>
 
   <div id="createPatient">
-    <button (click)="togglePatient()">Créer un patient</button>
+    <app-generic-button (click)="togglePatient()" title="Créer un patient"></app-generic-button>
 
     <div [hidden]="hidden_create">
       <form id="formNewPatient" [formGroup]="newPatient" (ngSubmit)="submitCreate()">
@@ -86,7 +89,7 @@
     </div>
 
     <div id="updatePatient">
-      <button (click)="toggleUpdatePatient(idUpdatedPatient)">Mettre à jour un patient</button>
+      <app-generic-button (click)="toggleUpdatePatient()" title="Mettre à jour un patient"></app-generic-button>
       <label>Id à modifier</label>
       <input type="text" #idUpdatedPatient />  
 
@@ -120,7 +123,6 @@
         </form>
         
       </div>
-
 
   </div>
 

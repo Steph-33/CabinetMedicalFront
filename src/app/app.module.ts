@@ -10,6 +10,7 @@ import { InfirmierPageComponent } from './components/infirmier-page/infirmier-pa
 import { HomeComponent } from './components/home/home.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { DeplacementPageComponent } from './components/deplacement-page/deplacement-page.component';
+import { GenericButtonComponent } from './components/generic-button/generic-button.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,14 @@ import { DeplacementPageComponent } from './components/deplacement-page/deplacem
     InfirmierPageComponent,
     HomeComponent,
     TitleBarComponent,
-    DeplacementPageComponent
+    DeplacementPageComponent,
+    GenericButtonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
