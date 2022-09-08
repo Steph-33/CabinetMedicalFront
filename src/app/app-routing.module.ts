@@ -6,7 +6,6 @@ import { HomeComponent } from './components/home/home.component';
 import { DeplacementPageComponent } from './components/deplacement-page/deplacement-page.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
   {path: 'patient', component: PatientPageComponent},
   {path: 'infirmier', component: InfirmierPageComponent}, 
   {path: 'deplacement', component: DeplacementPageComponent}
