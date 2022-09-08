@@ -16,15 +16,15 @@ export class DeplacementService {
   /**
   * Get Deplacement by patient 
   */
-  getDeplacementByPatient : (idPatient: string) => Observable<Deplacement> = (idPatient: string) => {
-    return this.http.get<Deplacement>(`${this.domaine}/deplacements/${idPatient}`);
+  getDeplacementByPatient : (idPatient: string) => Observable<Deplacement[]> = (idPatient: string) => {
+    return this.http.get<Deplacement[]>(`${this.domaine}/deplacements/${idPatient}`);
   }
 
   /**
   * Get Deplacement by patient and infirmier 
   */
-   getDeplacementByPatientAndInfirmier : (idPatient: string, idInfirmier : string) => Observable<Deplacement> = (idPatient: string, idInfirmier : string) => {
-    return this.http.get<Deplacement>(`${this.domaine}/deplacements/${idPatient}/${idInfirmier}`);
+   getDeplacementByPatientAndInfirmier : (idPatient: string, idInfirmier : string) => Observable<Deplacement[]> = (idPatient: string, idInfirmier : string) => {
+    return this.http.get<Deplacement[]>(`${this.domaine}/deplacements/${idPatient}/${idInfirmier}`);
   }
 
   /**
@@ -38,7 +38,7 @@ export class DeplacementService {
   * Update deplacement  
   */
    updateDeplacement : (id : string, item: Deplacement) => Observable<Observable<Deplacement>> = (id : string, item: Deplacement) => {
-    return this.http.put<Observable<Deplacement>>(`${this.domaine}/deplacements/${id}`, item);
+    return this.http.patch<Observable<Deplacement>>(`${this.domaine}/deplacements/${id}`, item);
   }
 
   /**
