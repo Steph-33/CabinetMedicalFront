@@ -1,1 +1,35 @@
-<p>deplacement-page works!</p>
+<div id="deplacement-page">
+    <div id="byPatient">
+        <button (click)="getDeplacementsByPatient(idPatient)">Afficher les déplacements par patient</button>
+        <input type="text" #idPatient placeholder="Veuillez rentrer l'id du patient ici"/>
+    
+        <div [hidden]="hidden_by_patient">
+          <fieldset class="deplacementsField"><legend>{{patientId}}</legend>
+            <div *ngFor="let deplacement of deplacementsByPatient; let i = index">
+                <strong>Déplacement n°{{i+1}}</strong><br/>
+                Coût : {{deplacement.cout}}<br/>
+                Date : {{deplacement.date}}<br/>
+                Infirmier : {{deplacement.infirmier?.nom}} {{deplacement.infirmier?.prenom}}<br/>
+                <hr>
+            </div>
+          </fieldset>
+        </div>
+    </div>
+
+    <div id="byPatientAndInfirmier">
+        <button (click)="getDeplacementsByPatientAndInfirmier(idPatientAndI, idInfirmierAndP)">Afficher les déplacements par Patient et par Infirmier</button>
+        <input type="text" #idPatientAndI placeholder="Veuillez rentrer l'id du patient ici"/>
+        <input type="text" #idInfirmierAndP placeholder="Veuillez rentrer l'id de l'infirmier ici"/>
+    
+        <div [hidden]="hidden_by_patient_and_infirmier">
+          <fieldset class="deplacementsField"><legend>{{patientId}}/{{infirmierId}}</legend>
+            <div *ngFor="let deplacement of deplacementsByPatientAndInfirmier; let i = index">
+                <strong>Déplacement n°{{i+1}}</strong><br/>
+                Coût : {{deplacement.cout}}<br/>
+                Date : {{deplacement.date}}<br/>
+                <hr>
+            </div>
+          </fieldset>
+        </div>
+    </div>
+</div>

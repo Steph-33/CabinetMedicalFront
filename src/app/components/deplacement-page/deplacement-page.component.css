@@ -1,0 +1,17 @@
+#deplacement-page {
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-around;
+}
+
+#byPatient{
+    display: flex; 
+    flex-direction: column;
+    width: 25%;
+}
+#byPatientAndInfirmier{
+    display: flex; 
+    flex-direction: column;
+    width: 35%;
+    justify-content: space-around;
+}
