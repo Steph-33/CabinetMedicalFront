@@ -54,8 +54,7 @@
 .patientField {
     text-align: center;
     margin-bottom: 5px;
-    border-color: #64A6F2;
-    box-shadow: 1px;
+    border-radius: 5px;
 }
 
 .patientField:hover {
@@ -70,28 +69,8 @@ input {
     margin-bottom: 2em;
 }
 
-.activeClass {
-    background-color:lightcyan;
-}
-
-.inactiveClass {
-    background-color: lightgray;
-}
-
 #formNewPatient {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.deleteButton {
-    margin-top: 1em;
-    width: 3em;
-    height: 2em;
-    background-color: lightcoral;
-    color: white;
-    border-radius: 5px;
-}
-.deleteButton:hover {
-    background-color: red;
 }

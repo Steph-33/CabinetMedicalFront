@@ -1,0 +1,12 @@
+<fieldset class="patientField" [ngClass]="{'activeClass': patient.active && type != 'all', 'inactiveClass': !patient.active && type != 'all', 
+    'activeClassAll': patient.active && type == 'all', 'inactiveClassAll': !patient.active && type == 'all'}">
+  <legend *ngIf="type != 'byName'">{{patient.id}}</legend>
+  <legend *ngIf="type == 'byName'">{{patient.nomPatient}}</legend>
+  <span *ngIf="type == 'byName'">Id : {{patient.id}}</span> <br/>
+  {{patient.nomPatient}} {{patient.prenomPatient}} <br/>
+  Sexe : {{patient.sexe}} <br/>
+  Né(e) le : {{patient.dateNaissance}} <br/>
+  Adresse : {{patient.adresse}} <br/>
+  Numéro de secu : {{patient.numeroSecu}} <br/>
+</fieldset>
+<button *ngIf="type == 'all'" class="deleteButton">X</button>
