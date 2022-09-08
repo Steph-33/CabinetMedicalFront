@@ -4,11 +4,10 @@
     <app-generic-button (click)="toggleAllPatients()" title="Afficher tous les patients"></app-generic-button>
 
     <div *ngIf="!hidden_all_patients" id="hiddenPartAll">
-    <!--<div [hidden]="hidden_all_patients" id="hiddenPartAll">-->
       <div *ngFor="let patient of patients">
         <!--<div *ngIf="patient.active"> -->
         <div class="field">
-          <fieldset class="patientField" [ngClass]="{'activeClass': patient.active, 'inactiveClass': !patient.active}"><legend>{{patient.id}}</legend>
+          <fieldset class="patientField" [ngClass]="{'activeClassAll': patient.active, 'inactiveClassAll': !patient.active}"><legend>{{patient.id}}</legend>
             {{patient.nomPatient}} {{patient.prenomPatient}} <br/>
             Sexe : {{patient.sexe}} <br/>
             Né(e) le : {{patient.dateNaissance}} <br/>
