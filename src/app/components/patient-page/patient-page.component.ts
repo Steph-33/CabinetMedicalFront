@@ -19,11 +19,11 @@ export class PatientPageComponent implements OnInit {
   hidden_create: boolean = true;
   hidden_update: boolean = true;
 
-  newPatient: FormGroup;
-  updatePatient: FormGroup;
+  newPatientForm: FormGroup;
+  updatePatientForm: FormGroup;
 
   constructor(private service: PatientService) { 
-    this.newPatient = new FormGroup({
+    this.newPatientForm = new FormGroup({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
       sexe: new FormControl('', [Validators.required, Validators.pattern('F|M')]),
@@ -31,7 +31,7 @@ export class PatientPageComponent implements OnInit {
       adresse: new FormControl('', Validators.required),
       numSecu: new FormControl('', [Validators.required, Validators.pattern('[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9] [0-9][0-9]')])
     })
-    this.updatePatient = new FormGroup({
+    this.updatePatientForm = new FormGroup({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
       sexe: new FormControl('', [Validators.required, Validators.pattern('F|M')]),
@@ -98,12 +98,12 @@ export class PatientPageComponent implements OnInit {
 
   submitCreate(): void {
     let newItem = new Patient();
-      newItem.nomPatient = this.newPatient.controls['nom'].value;
-      newItem.prenomPatient = this.newPatient.controls['prenom'].value;
-      newItem.dateNaissance = this.newPatient.controls['dateNaissance'].value;
-      newItem.sexe = this.newPatient.controls['sexe'].value;
-      newItem.adresse = this.newPatient.controls['adresse'].value;
-      newItem.numeroSecu = this.newPatient.controls['numSecu'].value;
+      newItem.nomPatient = this.newPatientForm.controls['nom'].value;
+      newItem.prenomPatient = this.newPatientForm.controls['prenom'].value;
+      newItem.dateNaissance = this.newPatientForm.controls['dateNaissance'].value;
+      newItem.sexe = this.newPatientForm.controls['sexe'].value;
+      newItem.adresse = this.newPatientForm.controls['adresse'].value;
+      newItem.numeroSecu = this.newPatientForm.controls['numSecu'].value;
       newItem.active = true;
 
     this.service.createPatient(newItem).subscribe(
@@ -114,7 +114,7 @@ export class PatientPageComponent implements OnInit {
       })
 
       // Remise à 0 du formulaire
-    this.newPatient.reset();
+    this.newPatientForm.reset();
   }
   
   deletePatient(id: string|undefined): void {
@@ -128,14 +128,25 @@ export class PatientPageComponent implements OnInit {
     )
   }
 
+  activePatient(id: string|undefined): void {
+    this.service.activatePatient(id).subscribe(
+      ok => {
+        this.getPatients();
+      },
+        err => {
+          console.error(err);
+      } 
+    )
+  }
+
   submitUpdate(idUpdatedPatient: HTMLInputElement): void {
     let newItem = new Patient();
-      newItem.nomPatient = this.updatePatient.controls['nom'].value;
-      newItem.prenomPatient = this.updatePatient.controls['prenom'].value;
-      newItem.dateNaissance = this.updatePatient.controls['dateNaissance'].value;
-      newItem.sexe = this.updatePatient.controls['sexe'].value;
-      newItem.adresse = this.updatePatient.controls['adresse'].value;
-      newItem.numeroSecu = this.updatePatient.controls['numSecu'].value;
+      newItem.nomPatient = this.updatePatientForm.controls['nom'].value;
+      newItem.prenomPatient = this.updatePatientForm.controls['prenom'].value;
+      newItem.dateNaissance = this.updatePatientForm.controls['dateNaissance'].value;
+      newItem.sexe = this.updatePatientForm.controls['sexe'].value;
+      newItem.adresse = this.updatePatientForm.controls['adresse'].value;
+      newItem.numeroSecu = this.updatePatientForm.controls['numSecu'].value;
       newItem.active = true;
 
     this.service.updatePatient(idUpdatedPatient.value, newItem).subscribe(
@@ -147,15 +158,28 @@ export class PatientPageComponent implements OnInit {
       }
     );
     // Remise à 0 du formulaire
-    this.updatePatient.reset();
+    this.updatePatientForm.reset();
     idUpdatedPatient.value = '';
   }
 
-  togglePatient():void { 
+  togglePatient(): void { 
     this.hidden_create = !this.hidden_create;
   }
   
-  toggleUpdatePatient():void { 
+  toggleUpdatePatient(idUpdatedPatient: HTMLInputElement): void {
+
+    this.service.getPatientById(idUpdatedPatient.value).subscribe((res:Patient) => {
+      this.updatePatientForm.controls['nom'].setValue(res.nomPatient);
+      this.updatePatientForm.controls['prenom'].setValue(res.prenomPatient);
+      this.updatePatientForm.controls['sexe'].setValue(res.sexe);
+      this.updatePatientForm.controls['dateNaissance'].setValue(res.dateNaissance);
+      this.updatePatientForm.controls['adresse'].setValue(res.adresse);
+      this.updatePatientForm.controls['numSecu'].setValue(res.numeroSecu);
+    },
+    (err: any) => {
+       console.error(err);
+    })
+    
     this.hidden_update = !this.hidden_update;
   }
 

@@ -40,15 +40,3 @@
     font-family: bold;
     border-color: lightgray;
 }
-
-.deleteButton {
-    margin-bottom: 2.5em;
-    width: 4em;
-    height: 2em;
-    background-color: lightcoral;
-    color: white;
-    border-radius: 5px;
-}
-.deleteButton:hover {
-    background-color: red;
-}

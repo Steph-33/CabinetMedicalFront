@@ -48,7 +48,6 @@
 }
 
 .field {
-    width: 40%;
 }
 
 .patientField {
@@ -73,4 +72,35 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#buttons {
+    margin-top: 0.5em;
+    margin-bottom: 2.5em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.deleteButton {
+
+    width: 4em;
+    height: 2em;
+    background-color: lightcoral;
+    color: white;
+    border-radius: 5px;
+}
+.deleteButton:hover {
+    background-color: red;
+}
+
+.activateButton {
+    width: 4em;
+    height: 2em;
+    background-color: rgba(144, 238, 144, 0.685);
+    border-radius: 5px;
+}
+.activateButton:hover {
+    background-color: rgb(71, 255, 47);
 }
