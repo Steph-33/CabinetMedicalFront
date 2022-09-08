@@ -49,6 +49,10 @@ export class PatientService {
     return this.http.patch(`${this.domaine}/patients/${id}`, "");
   }
 
+  activatePatient = (id: string|undefined) => {
+    return this.http.patch(`${this.domaine}/patients/active/${id}`, "");
+  }
+
   /*
   Update a patient
   */

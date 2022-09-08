@@ -6,11 +6,15 @@
     <div *ngIf="!hidden_all_patients" id="hiddenPartAll">
       <div *ngFor="let patient of patients">
         <div class="field">
-           <app-generic-fieldset-patient type="all" [patient]="patient" (click)="deletePatient(patient.id)"></app-generic-fieldset-patient>
+          <app-generic-fieldset-patient type="all" [patient]="patient"></app-generic-fieldset-patient>
+          <div id="buttons">
+            <button class="deleteButton" (click)="deletePatient(patient.id)">X</button>
+            <button class="activateButton" (click)="activePatient(patient.id)">A</button>
+          </div>
         </div>
       </div>
     </div>
-    
+
   </div>
 
   <div id="displayBy">
@@ -37,7 +41,7 @@
     <app-generic-button (click)="togglePatient()" title="Créer un patient"></app-generic-button>
 
     <div [hidden]="hidden_create">
-      <form id="formNewPatient" [formGroup]="newPatient" (ngSubmit)="submitCreate()">
+      <form id="formNewPatient" [formGroup]="newPatientForm" (ngSubmit)="submitCreate()">
         <div>
           <label>Nom : </label>
           <input type="text" formControlName="nom"/>
@@ -62,18 +66,18 @@
           <label>Numéro de sécu : </label>
           <input type="text" formControlName="numSecu"/>
         </div>
-        <button type="submit" [disabled]="!newPatient.valid">Valider</button>
+        <button type="submit" [disabled]="!newPatientForm.valid">Valider</button>
       </form>
       
     </div>
 
     <div id="updatePatient">
-      <app-generic-button (click)="toggleUpdatePatient()" title="Mettre à jour un patient"></app-generic-button>
+      <app-generic-button (click)="toggleUpdatePatient(idUpdatedPatient)" title="Mettre à jour un patient"></app-generic-button>
       <label>Id à modifier</label>
       <input type="text" #idUpdatedPatient placeholder="Id du patient à modifier"/>  
 
       <div [hidden]="hidden_update">
-        <form id="formUpdatePatient" [formGroup]="updatePatient" (ngSubmit)="submitUpdate(idUpdatedPatient)">
+        <form id="formUpdatePatient" [formGroup]="updatePatientForm" (ngSubmit)="submitUpdate(idUpdatedPatient)">
           <div>
             <label>Nom : </label>
             <input type="text" formControlName="nom"/>
@@ -98,11 +102,12 @@
             <label>Numéro de sécu : </label>
             <input type="text" formControlName="numSecu"/>
           </div>
-          <button type="submit" [disabled]="!updatePatient.valid">Valider</button>
+          <button type="submit" [disabled]="!updatePatientForm.valid">Valider</button>
         </form>
-        
+
       </div>
 
   </div>
+
 
 </div>
