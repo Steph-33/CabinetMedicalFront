@@ -44,7 +44,7 @@ export class DeplacementService {
   /**
    *  Delete deplacement
    */
-   deleteDeplacement : (id: string) => Observable<Deplacement> = (id: string) => {
+   deleteDeplacement : (id: string|undefined) => Observable<Deplacement> = (id: string|undefined) => {
     return this.http.delete<Deplacement>(`${this.domaine}/deplacements/${id}`);
   }
 
