@@ -10,6 +10,7 @@
           <div id="buttons">
             <button class="deleteButton" (click)="deletePatient(patient.id)">X</button>
             <button class="activateButton" (click)="activePatient(patient.id)">A</button>
+            <button class="addDpct" [routerLink]="['/infirmier']" [queryParams]="{id: patient.id, idInf: patient.infirmier?.id}">+ Dpct</button> 
           </div>
         </div>
       </div>
@@ -20,7 +21,11 @@
   <div id="displayBy">
     <div id="byId">
       <app-generic-button (click)="getPatientById(idPatient)" title="Afficher par id"></app-generic-button>
-      <input type="text" #idPatient placeholder="Id du patient recherché"/>
+
+      <select id="selectIdPatient" #idPatient>
+        <option>Choisir un id</option>
+        <option *ngFor="let item of patients" value={{item.id}}>{{item.id}}</option>
+      </select>
 
       <div [hidden]="hidden_by_id">
         <app-generic-fieldset-patient type="byId" [patient]="patientId"></app-generic-fieldset-patient>
@@ -29,8 +34,12 @@
 
     <div id="byName">
       <app-generic-button (click)="getPatientByName(namePatient)" title="Afficher par nom"></app-generic-button>
-      <input type="text" #namePatient placeholder="Nom du patient recherché"/>
-   
+         
+      <select id="selectNamePatient" #namePatient>
+        <option>Choisir un nom</option>
+        <option *ngFor="let item of patients" value={{item.nomPatient}}>{{item.nomPatient}}</option>
+      </select>
+
       <div [hidden]="hidden_by_name">
         <app-generic-fieldset-patient type="byName" [patient]="patientName"></app-generic-fieldset-patient>
       </div>
@@ -43,27 +52,27 @@
     <div [hidden]="hidden_create">
       <form id="formNewPatient" [formGroup]="newPatientForm" (ngSubmit)="submitCreate()">
         <div>
-          <label>Nom : </label>
+          <label class="labelInForm">Nom : </label>
           <input type="text" formControlName="nom"/>
         </div>
         <div>
-          <label>Prenom : </label>
+          <label class="labelInForm">Prenom : </label>
           <input type="text" formControlName="prenom"/>
         </div>
         <div>
-          <label>Sexe (F ou M) : </label>
+          <label class="labelInForm">Sexe (F ou M) : </label>
           <input type="text" formControlName="sexe"/>
         </div>
         <div>
-          <label>Date de naissance : </label>
+          <label class="labelInForm">Date de naissance : </label>
           <input type="text" formControlName="dateNaissance"/>
         </div>
         <div>
-          <label>Adresse : </label>
+          <label class="labelInForm">Adresse : </label>
           <input type="text" formControlName="adresse"/>
         </div>
         <div>
-          <label>Numéro de sécu : </label>
+          <label class="labelInForm">Numéro de sécu : </label>
           <input type="text" formControlName="numSecu"/>
         </div>
         <button type="submit" [disabled]="!newPatientForm.valid">Valider</button>
@@ -72,34 +81,37 @@
     </div>
 
     <div id="updatePatient">
-      <app-generic-button (click)="toggleUpdatePatient(idUpdatedPatient)" title="Mettre à jour un patient"></app-generic-button>
-      <label>Id à modifier</label>
-      <input type="text" #idUpdatedPatient placeholder="Id du patient à modifier"/>  
+      <app-generic-button (click)="toggleUpdatePatient(idUpdatePatient)" title="Mettre à jour un patient"></app-generic-button>
+      
+      <select id="selectUpdatePatient" #idUpdatePatient>
+        <option>Choisir un nom</option>
+        <option *ngFor="let item of patients" value={{item.id}}>{{item.nomPatient}}</option>
+      </select>
 
       <div [hidden]="hidden_update">
-        <form id="formUpdatePatient" [formGroup]="updatePatientForm" (ngSubmit)="submitUpdate(idUpdatedPatient)">
+        <form id="formUpdatePatient" [formGroup]="updatePatientForm" (ngSubmit)="submitUpdate(idUpdatePatient)">
           <div>
-            <label>Nom : </label>
+            <label class="labelInForm">Nom : </label>
             <input type="text" formControlName="nom"/>
           </div>
           <div>
-            <label>Prenom : </label>
+            <label class="labelInForm">Prenom : </label>
             <input type="text" formControlName="prenom"/>
           </div>
           <div>
-            <label>Sexe (F ou M) : </label>
+            <label class="labelInForm">Sexe (F ou M) : </label>
             <input type="text" formControlName="sexe"/>
           </div>
           <div>
-            <label>Date de naissance : </label>
+            <label class="labelInForm">Date de naissance : </label>
             <input type="text" formControlName="dateNaissance"/>
           </div>
           <div>
-            <label>Adresse : </label>
+            <label class="labelInForm">Adresse : </label>
             <input type="text" formControlName="adresse"/>
           </div>
           <div>
-            <label>Numéro de sécu : </label>
+            <label class="labelInForm">Numéro de sécu : </label>
             <input type="text" formControlName="numSecu"/>
           </div>
           <button type="submit" [disabled]="!updatePatientForm.valid">Valider</button>
@@ -108,6 +120,5 @@
       </div>
 
   </div>
-
 
 </div>

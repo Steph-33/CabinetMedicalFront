@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Patient } from 'src/app/models/patient.model';
 import { PatientService } from 'src/app/services/patient/patient.service';
 
+
 @Component({
   selector: 'app-patient-page',
   templateUrl: './patient-page.component.html',
@@ -55,13 +56,13 @@ export class PatientPageComponent implements OnInit {
     )
   }
 
-  getPatientById = (id: HTMLInputElement) => {
+  getPatientById = (id: HTMLSelectElement) => {
     // @ts-ignore
-    if (id.value == '') {
+    if (id.value == '' || id.value == 'Choisir un id') {
       if (!this.hidden_by_id) {
         this.hidden_by_id = true;
       }
-      alert("Pas d'id renseigné");
+      alert("Pas d'id valide renseigné");
     } else {
       this.service.getPatientById(id.value).subscribe((res:Patient) => {
         this.patientId = res},
@@ -76,12 +77,12 @@ export class PatientPageComponent implements OnInit {
     }
   }
 
-  getPatientByName = (name: HTMLInputElement) => {
-    if (name.value == '') {
+  getPatientByName = (name: HTMLSelectElement) => {
+    if (name.value == '' || name.value == 'Choisir un nom') {
       if (!this.hidden_by_name) {
         this.hidden_by_name = true;
       }
-      alert("Pas de nom renseigné");
+      alert("Pas de nom valide renseigné");
     } else {
       this.service.getPatientByName(name.value).subscribe((res: Patient) => {
         this.patientName = res},
@@ -115,6 +116,7 @@ export class PatientPageComponent implements OnInit {
 
       // Remise à 0 du formulaire
     this.newPatientForm.reset();
+    this.hidden_create = true;
   }
   
   deletePatient(id: string|undefined): void {
@@ -139,7 +141,7 @@ export class PatientPageComponent implements OnInit {
     )
   }
 
-  submitUpdate(idUpdatedPatient: HTMLInputElement): void {
+  submitUpdate(idUpdatedPatient: HTMLSelectElement): void {
     let newItem = new Patient();
       newItem.nomPatient = this.updatePatientForm.controls['nom'].value;
       newItem.prenomPatient = this.updatePatientForm.controls['prenom'].value;
@@ -166,21 +168,25 @@ export class PatientPageComponent implements OnInit {
     this.hidden_create = !this.hidden_create;
   }
   
-  toggleUpdatePatient(idUpdatedPatient: HTMLInputElement): void {
+  toggleUpdatePatient(idUpdatedPatient: HTMLSelectElement): void {
 
-    this.service.getPatientById(idUpdatedPatient.value).subscribe((res:Patient) => {
-      this.updatePatientForm.controls['nom'].setValue(res.nomPatient);
-      this.updatePatientForm.controls['prenom'].setValue(res.prenomPatient);
-      this.updatePatientForm.controls['sexe'].setValue(res.sexe);
-      this.updatePatientForm.controls['dateNaissance'].setValue(res.dateNaissance);
-      this.updatePatientForm.controls['adresse'].setValue(res.adresse);
-      this.updatePatientForm.controls['numSecu'].setValue(res.numeroSecu);
-    },
-    (err: any) => {
-       console.error(err);
-    })
-    
-    this.hidden_update = !this.hidden_update;
+    if (idUpdatedPatient.value == 'Choisir un nom') {
+      alert("Nom invalide");
+      this.hidden_update = true;  
+    } else {
+      this.service.getPatientById(idUpdatedPatient.value).subscribe((res:Patient) => {
+        this.updatePatientForm.controls['nom'].setValue(res.nomPatient);
+        this.updatePatientForm.controls['prenom'].setValue(res.prenomPatient);
+        this.updatePatientForm.controls['sexe'].setValue(res.sexe);
+        this.updatePatientForm.controls['dateNaissance'].setValue(res.dateNaissance);
+        this.updatePatientForm.controls['adresse'].setValue(res.adresse);
+        this.updatePatientForm.controls['numSecu'].setValue(res.numeroSecu);
+        this.hidden_update = false;
+      },
+      (err: any) => {
+        console.error(err);
+      })
+    }
   }
 
   toggleAllPatients(): void {
