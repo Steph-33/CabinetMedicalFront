@@ -17,6 +17,7 @@ import { GenericFieldsetInfirmierComponent } from './components/generic-fieldset
 import { InfirmierCreateComponent } from './components/infirmier-create/infirmier-create.component';
 import { InfirmierUpdateComponent } from './components/infirmier-update/infirmier-update.component';
 import { GenericFormPatientComponent } from './components/generic-form-patient/generic-form-patient.component';
+import { AddDeplacementPageComponent } from './components/add-deplacement-page/add-deplacement-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GenericFormPatientComponent } from './components/generic-form-patient/g
     GenericFieldsetInfirmierComponent,
     InfirmierCreateComponent,
     InfirmierUpdateComponent,
-    GenericFormPatientComponent
+    GenericFormPatientComponent,
+    AddDeplacementPageComponent
   ],
   imports: [
     BrowserModule,

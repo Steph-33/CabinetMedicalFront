@@ -4,11 +4,13 @@ import { PatientPageComponent } from './components/patient-page/patient-page.com
 import { InfirmierPageComponent } from './components/infirmier-page/infirmier-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { DeplacementPageComponent } from './components/deplacement-page/deplacement-page.component';
+import { AddDeplacementPageComponent } from './components/add-deplacement-page/add-deplacement-page.component';
 
 const routes: Routes = [
-  {path: 'patient', component: PatientPageComponent},
-  {path: 'infirmier', component: InfirmierPageComponent}, 
-  {path: 'deplacement', component: DeplacementPageComponent}
+  { path: 'patient', component: PatientPageComponent },
+  { path: 'infirmier', component: InfirmierPageComponent },
+  { path: 'deplacement', component: DeplacementPageComponent },
+  { path: 'add-deplacement', component: AddDeplacementPageComponent }
 
 ];
 
