@@ -1,0 +1,28 @@
+<form id="formNewPatient" [formGroup]="patientForm">    
+    <div>
+      <label class="labelInForm">Nom : </label>
+      <input type="text" formControlName="nom"/>
+    </div>
+    <div>
+      <label class="labelInForm">Prenom : </label>
+      <input type="text" formControlName="prenom"/>
+    </div>
+    <div>
+      <label class="labelInForm">Sexe (F ou M) : </label>
+      <input type="text" formControlName="sexe"/>
+    </div>
+    <div>
+      <label class="labelInForm">Date de naissance : </label>
+      <input type="text" formControlName="dateNaissance"/>
+    </div>
+    <div>
+      <label class="labelInForm">Adresse : </label>
+      <input type="text" formControlName="adresse"/>
+    </div>
+    <div>
+      <label class="labelInForm">Numéro de sécu : </label>
+      <input type="text" formControlName="numSecu"/>
+    </div>
+    <button type="submit" [disabled]="!patientForm.valid" (click)="submit()">Valider</button>
+<form>
+

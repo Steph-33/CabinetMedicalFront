@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Infirmier } from 'src/app/models/infirmier.model';
 import { InfirmierService } from 'src/app/services/infirmier/infirmier.service';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0524800 (Add a generic form for patient)
 
 @Component({
   selector: 'app-infirmier-page',
@@ -18,10 +21,7 @@ export class InfirmierPageComponent implements OnInit {
   hidden_by_id: boolean = true;
   hidden_by_name: boolean = true;
 
-  idParam!: string;
-  nomPatParam!:string;
-
-  constructor(private service: InfirmierService) {   }
+  constructor(private service: InfirmierService) { }
 
   ngOnInit(): void {
     this.getInfirmiers();
