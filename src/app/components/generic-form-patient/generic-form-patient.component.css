@@ -1,0 +1,21 @@
+#formNewPatient {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.labelInForm {
+    padding-right: 1em;
+}
+
+input {
+    margin-bottom: 2em;
+}
+
+button {
+    width: 5em;
+}
+
+select {
+    margin-bottom: 1.5em;
+}

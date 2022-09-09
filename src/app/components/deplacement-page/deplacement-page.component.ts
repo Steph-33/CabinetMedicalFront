@@ -66,7 +66,12 @@ export class DeplacementPageComponent implements OnInit {
    */
   getPatientsInfirmier = (idInfirmier: string) => {
     this.infirmiersPatient = [];
+    let trouve: boolean = false;
+    let i = 0;
+
     for (let dpct of this.allDeplacements) {
+      trouve = false;
+      i = 0;
       if (dpct.infirmier?.id == idInfirmier) {
         if (dpct.patient?.nomPatient !== undefined) {
           this.infirmiersPatient.push(dpct.patient);
@@ -77,6 +82,7 @@ export class DeplacementPageComponent implements OnInit {
     }
   }
 
+  
   /**
    * Récupération de tous les patients
    */
