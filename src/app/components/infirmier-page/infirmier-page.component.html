@@ -10,6 +10,7 @@
           <div id="buttons">
             <button class="deleteButton" (click)="deleteInfirmier(infirmier.id)">X</button>
             <button class="activateButton" (click)="activeInfirmier(infirmier.id)">A</button>
+            <button class="addDpct" [routerLink]="['/deplacement']" [queryParams]="{idInf: infirmier.id}">+ Dpct</button> 
           </div>
         </div>
       </div>
