@@ -1,35 +1,68 @@
 <div id="deplacement-page">
-    <div id="byPatient">
-        <button (click)="getDeplacementsByPatient(idPatient)">Afficher les déplacements par patient</button>
-        <input type="text" #idPatient placeholder="Veuillez rentrer l'id du patient ici"/>
-    
-        <div [hidden]="hidden_by_patient">
-          <fieldset class="deplacementsField"><legend>{{patientId}}</legend>
-            <div *ngFor="let deplacement of deplacementsByPatient; let i = index">
-                <strong>Déplacement n°{{i+1}}</strong><br/>
-                Coût : {{deplacement.cout}}<br/>
-                Date : {{deplacement.date}}<br/>
-                Infirmier : {{deplacement.infirmier?.nom}} {{deplacement.infirmier?.prenom}}<br/>
-                <hr>
+    <div id="getDeplacements">
+        <h2>Récupération des Déplacements</h2>
+        <div id="byPatient">
+            <app-generic-button (click)="getDeplacementsByPatient(idPatient)" title="Déplacements par patient"></app-generic-button>
+            <input type="text" #idPatient placeholder="Veuillez entrer l'id du patient ici"/>
+        
+            <div [hidden]="hidden_by_patient">
+            <fieldset class="deplacementsField"><legend>{{patientId}}</legend>
+                <div *ngFor="let deplacement of deplacementsByPatient; let i = index">
+                    <strong>Déplacement n°{{i+1}}</strong><br/>
+                    Coût : {{deplacement.cout}} €<br/>
+                    Date : {{deplacement.date}}<br/>
+                    Infirmier : {{deplacement.infirmier?.nom}} {{deplacement.infirmier?.prenom}}<br/>
+                    <div id="updateAndDeleteButtons">
+                        <button id="updateButton">Modifier</button>
+                        <button id="deleteButton" (click)="deleteDeplacement(deplacement.id)">Supprimer</button>
+                    </div>
+                    <hr>
+                </div>
+            </fieldset>
             </div>
-          </fieldset>
+        </div>
+
+        <div id="byPatientAndInfirmier">
+            <app-generic-button (click)="getDeplacementsByPatientAndInfirmier(idPatientAndI, idInfirmierAndP)" title="Déplacements par Patient et par Infirmier"></app-generic-button>
+            <input type="text" #idPatientAndI placeholder="Veuillez entrer l'id du patient ici"/>
+            <input type="text" #idInfirmierAndP placeholder="Veuillez entrer l'id de l'infirmier ici"/>
+        
+            <div [hidden]="hidden_by_patient_and_infirmier">
+            <fieldset class="deplacementsField"><legend>{{patientId}}/{{infirmierId}}</legend>
+                <div *ngFor="let deplacement of deplacementsByPatientAndInfirmier; let i = index">
+                    <strong>Déplacement n°{{i+1}}</strong><br/>
+                    Coût : {{deplacement.cout}} €<br/>
+                    Date : {{deplacement.date}}<br/>
+                    <hr>
+                </div>
+            </fieldset>
+            </div>
         </div>
     </div>
+    <div id="createDeplacement">
+        <app-generic-button (click)="toggleDeplacement()" title="Créer un déplacement"></app-generic-button>
 
-    <div id="byPatientAndInfirmier">
-        <button (click)="getDeplacementsByPatientAndInfirmier(idPatientAndI, idInfirmierAndP)">Afficher les déplacements par Patient et par Infirmier</button>
-        <input type="text" #idPatientAndI placeholder="Veuillez rentrer l'id du patient ici"/>
-        <input type="text" #idInfirmierAndP placeholder="Veuillez rentrer l'id de l'infirmier ici"/>
-    
-        <div [hidden]="hidden_by_patient_and_infirmier">
-          <fieldset class="deplacementsField"><legend>{{patientId}}/{{infirmierId}}</legend>
-            <div *ngFor="let deplacement of deplacementsByPatientAndInfirmier; let i = index">
-                <strong>Déplacement n°{{i+1}}</strong><br/>
-                Coût : {{deplacement.cout}}<br/>
-                Date : {{deplacement.date}}<br/>
-                <hr>
+        <div [hidden]="hidden_create">
+        <form id="formNewDeplacement" [formGroup]="newDeplacement" (ngSubmit)="submitCreate()">
+            <div>
+            <label>Coût : </label>
+            <input type="text" formControlName="cout"/> €
             </div>
-          </fieldset>
-        </div>
+            <div>
+            <label>Date : </label>
+            <input type="text" formControlName="date" placeholder="jj-mm-aaaa"/>
+            </div>
+            <div>
+            <label>Patient : </label>
+            <input type="text" formControlName="patient" placeholder="Veuillez entrer l'id du patient"/>
+            </div>
+            <div>
+            <label>Infirmier : </label>
+            <input type="text" formControlName="infirmier" placeholder="Veuillez entrer l'id de l'infirmier"/>
+            </div>
+            <button type="submit" [disabled]="!newDeplacement.valid">Valider</button>
+        </form>
+        
+        </div>      
     </div>
 </div>
