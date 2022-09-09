@@ -23,8 +23,8 @@ export class InfirmierPageComponent implements OnInit {
   newInfirmierForm: FormGroup;
   updateInfirmierForm: FormGroup;
 
-  // idParam!: string;
-  // nomPatParam!:string;
+  idParam!: string;
+  nomPatParam!:string;
 
   constructor(private service: InfirmierService) { 
     this.newInfirmierForm = new FormGroup({
