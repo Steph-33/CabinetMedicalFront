@@ -28,16 +28,10 @@ export class DeplacementPageComponent implements OnInit {
   hidden_create: boolean = true;
   hidden_update: boolean = true;
 
-  newDeplacement: FormGroup;
+
   updateDeplacement: FormGroup;
 
   constructor(private service: DeplacementService, private patientService: PatientService, private infirmierService: InfirmierService) {
-    this.newDeplacement = new FormGroup({
-      cout: new FormControl('', Validators.required),
-      date: new FormControl('', [Validators.required, Validators.pattern('[0-3][0-9]-[0-1][0-9]-[1-2][0-9][0-9][0-9]')]),
-      patient: new FormControl('', Validators.required),
-      infirmier: new FormControl('', Validators.required),
-    })
     this.updateDeplacement = new FormGroup({
       cout: new FormControl('', Validators.required),
       date: new FormControl('', [Validators.required, Validators.pattern('[0-3][0-9]-[0-1][0-9]-[1-2][0-9][0-9][0-9]')]),
@@ -168,34 +162,6 @@ export class DeplacementPageComponent implements OnInit {
       this.patient = res;
     });
   }
-
-  /**
-  * Création d'un nouveau déplacement
-  */
-  submitCreate(): void {
-    let newItem = new Deplacement();
-    newItem.cout = this.newDeplacement.controls['cout'].value;
-    newItem.date = this.newDeplacement.controls['date'].value;
-    newItem.patient = new Patient();
-    this.patientService.getPatientById(this.newDeplacement.controls['patient'].value).subscribe((res: Patient) => {
-      newItem.patient = res;
-    });
-    newItem.infirmier = new Infirmier();
-    this.infirmierService.getInfirmierById(this.newDeplacement.controls['infirmier'].value).subscribe((res: Infirmier) => {
-      newItem.infirmier = res;
-    });
-
-    this.service.createDeplacement(newItem).subscribe(
-      res => {
-        alert("Votre nouveau déplacement a bien été créé !")
-      }, err => {
-        console.error(err)
-      })
-
-    // Remise à 0 du formulaire
-    this.newDeplacement.reset();
-  }
-
 
   /**
   * Suppression d'un déplacement

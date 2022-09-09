@@ -10,7 +10,8 @@
           <div id="buttons">
             <button class="deleteButton" (click)="deletePatient(patient.id)">X</button>
             <button class="activateButton" (click)="activePatient(patient.id)">A</button>
-            <button class="addDpct" [routerLink]="['/deplacement']" [queryParams]="{idInf: patient.infirmier?.id}">+ Dpct</button> 
+            <button class="addDpct" [routerLink]="['/add-deplacement']"
+              [queryParams]="{idInf: patient.infirmier?.id, idPat:patient.id}">+ Dpct</button>
           </div>
         </div>
       </div>
@@ -34,7 +35,7 @@
 
     <div id="byName">
       <app-generic-button (click)="getPatientByName(namePatient)" title="Afficher par nom"></app-generic-button>
-         
+
       <select id="selectNamePatient" #namePatient>
         <option>Choisir un nom</option>
         <option *ngFor="let item of patients" value={{item.nomPatient}}>{{item.nomPatient}}</option>
@@ -50,44 +51,45 @@
     <div id="createPatient">
       <app-generic-button (click)="togglePatient()" title="Créer un patient"></app-generic-button>
 
-      <div [hidden]="hidden_create">   
+      <div [hidden]="hidden_create">
         <app-generic-form-patient (submitCreate)="submitCreate($event)"></app-generic-form-patient>
       </div>
     </div>
 
     <div id="updatePatient">
-      <app-generic-button (click)="toggleUpdatePatient(idUpdatePatient)" title="Mettre à jour un patient"></app-generic-button>
-      
+      <app-generic-button (click)="toggleUpdatePatient(idUpdatePatient)" title="Mettre à jour un patient">
+      </app-generic-button>
+
       <select id="selectUpdatePatient" #idUpdatePatient (change)="toggleUpdatePatient(idUpdatePatient)">
         <option>Choisir un nom</option>
         <option *ngFor="let item of patients" value={{item.id}}>{{item.nomPatient}}</option>
       </select>
 
-      <div [hidden]="hidden_update">        
+      <div [hidden]="hidden_update">
         <form id="formUpdatePatient" [formGroup]="updatePatientForm" (ngSubmit)="submitUpdate(idUpdatePatient)">
           <div>
             <label class="labelInForm">Nom : </label>
-            <input type="text" formControlName="nom"/>
+            <input type="text" formControlName="nom" />
           </div>
           <div>
             <label class="labelInForm">Prenom : </label>
-            <input type="text" formControlName="prenom"/>
+            <input type="text" formControlName="prenom" />
           </div>
           <div>
             <label class="labelInForm">Sexe (F ou M) : </label>
-            <input type="text" formControlName="sexe"/>
+            <input type="text" formControlName="sexe" />
           </div>
           <div>
             <label class="labelInForm">Date de naissance : </label>
-            <input type="text" formControlName="dateNaissance"/>
+            <input type="text" formControlName="dateNaissance" />
           </div>
           <div>
             <label class="labelInForm">Adresse : </label>
-            <input type="text" formControlName="adresse"/>
+            <input type="text" formControlName="adresse" />
           </div>
           <div>
             <label class="labelInForm">Numéro de sécu : </label>
-            <input type="text" formControlName="numSecu"/>
+            <input type="text" formControlName="numSecu" />
           </div>
           <button type="submit" [disabled]="!updatePatientForm.valid">Valider</button>
         </form>
