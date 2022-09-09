@@ -75,12 +75,12 @@ export class DeplacementPageComponent implements OnInit {
     for (let dpct of this.allDeplacements) {
       if (dpct.infirmier?.id == idInfirmier) {
         if (dpct.patient?.nomPatient !== undefined) {
-          console.log(this.infirmiersPatient);
           this.infirmiersPatient.push(dpct.patient);
         }
+        this.infirmiersPatient = this.infirmiersPatient.filter((elem, index, self) => self.findIndex(
+          (t) => { return (t.id === elem.id) }) === index)
       }
     }
-
   }
 
   /**
@@ -160,8 +160,6 @@ export class DeplacementPageComponent implements OnInit {
       if (this.hidden_by_patient_and_infirmier) {
         this.hidden_by_patient_and_infirmier = false;
       }
-      // idPatient.value = '';
-      // idInfirmier.value = '';
     }
   }
 
