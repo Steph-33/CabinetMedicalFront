@@ -45,71 +45,10 @@
     </div>
   </div>
 
-  <div id="createInfirmier">
-    <app-generic-button (click)="toggleInfirmier()" title="Créer un infirmier"></app-generic-button>
-
-    <div [hidden]="hidden_create">
-      <form id="formNewInfirmier" [formGroup]="newInfirmierForm" (ngSubmit)="submitCreate()">
-        <div>
-          <label class="labelInForm">Nom : </label>
-          <input type="text" formControlName="nom"/>
-        </div>
-        <div>
-          <label class="labelInForm">Prenom : </label>
-          <input type="text" formControlName="prenom"/>
-        </div>
-        <div>
-          <label class="labelInForm">Téléphone Pro : </label>
-          <input type="text" formControlName="telFixe"/>
-        </div>
-        <div>
-          <label class="labelInForm">Téléphone Mobile : </label>
-          <input type="text" formControlName="telMobile"/>
-        </div>
-        <div>
-          <label class="labelInForm">Téléphone Fixe : </label>
-          <input type="text" formControlName="telFixe"/>
-        </div>
-        <button type="submit" [disabled]="!newInfirmierForm.valid">Valider</button>
-      </form>
-      
-    </div>
-
-    <div id="updateInfirmier">
-      <app-generic-button (click)="toggleUpdateInfirmier(idUpdateInfirmier)" title="Mettre à jour un infirmier"></app-generic-button>
-      
-      <select id="selectUpdateInfirmier" #idUpdateInfirmier>
-        <option>Choisir un nom</option>
-        <option *ngFor="let item of infirmiers" value={{item.id}}>{{item.nom}}</option>
-      </select>
-
-      <div [hidden]="hidden_update">
-        <form id="formUpdateInfirmier" [formGroup]="updateInfirmierForm" (ngSubmit)="submitUpdate(idUpdateInfirmier)">
-          <div>
-            <label class="labelInForm">Nom : </label>
-            <input type="text" formControlName="nom"/>
-          </div>
-          <div>
-            <label class="labelInForm">Prenom : </label>
-            <input type="text" formControlName="prenom"/>
-          </div>
-          <div>
-            <label class="labelInForm">Téléphone Pro : </label>
-            <input type="text" formControlName="telFixe"/>
-          </div>
-          <div>
-            <label class="labelInForm">Téléphone Mobile : </label>
-            <input type="text" formControlName="telMobile"/>
-          </div>
-          <div>
-            <label class="labelInForm">Téléphone Fixe : </label>
-            <input type="text" formControlName="telFixe"/>
-          </div>
-          <button type="submit" [disabled]="!updateInfirmierForm.valid">Valider</button>
-        </form>
-
-      </div>
-
+  <div>
+    <app-infirmier-create></app-infirmier-create>
+    <app-infirmier-update></app-infirmier-update>
   </div>
+  
 
 </div>

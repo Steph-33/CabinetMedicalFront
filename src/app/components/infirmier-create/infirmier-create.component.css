@@ -1,0 +1,4 @@
+#createInfirmier {
+    display: flex;
+    flex-direction: column;
+}
