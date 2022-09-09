@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Infirmier } from 'src/app/models/infirmier.model';
 import { InfirmierService } from 'src/app/services/infirmier/infirmier.service';
-<<<<<<< HEAD
-
-=======
->>>>>>> 0524800 (Add a generic form for patient)
 
 @Component({
   selector: 'app-infirmier-page',
