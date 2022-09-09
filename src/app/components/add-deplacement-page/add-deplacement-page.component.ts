@@ -18,6 +18,8 @@ export class AddDeplacementPageComponent implements OnInit {
   patientId!: string;
   infirmierId!: string;
   newDeplacement: FormGroup;
+  patient: Patient = new Patient();
+  infirmier: Infirmier = new Infirmier();
 
   constructor(private service: DeplacementService, private route: ActivatedRoute, private servicePatient: PatientService, private serviceInfirmier: InfirmierService) {
     this.newDeplacement = new FormGroup({
@@ -35,6 +37,16 @@ export class AddDeplacementPageComponent implements OnInit {
       this.newDeplacement.controls['infirmier'].setValue(params['idInf']);
       this.patientId = params['idPat'];
       this.infirmierId = params['idInf'];
+
+      // Get Patient from its id
+      this.servicePatient.getPatientById(this.patientId).subscribe((res: Patient) => {
+        this.patient = res;
+      });
+
+      // Get Infirmier from its id
+      this.serviceInfirmier.getInfirmierById(this.infirmierId).subscribe((res: Infirmier) => {
+        this.infirmier = res;
+      });
     })
   }
 
@@ -45,18 +57,13 @@ export class AddDeplacementPageComponent implements OnInit {
     let newItem = new Deplacement();
     newItem.cout = this.newDeplacement.controls['cout'].value;
     newItem.date = this.newDeplacement.controls['date'].value;
-    let patient = new Patient();
-    this.servicePatient.getPatientById(this.patientId);
-    let infirmier = new Infirmier();
-    this.serviceInfirmier.getInfirmierById(this.infirmierId);
-    newItem.patient = patient;
-    newItem.infirmier = infirmier;
-    console.log(patient);
-    console.log(infirmier);
+    newItem.patient = this.patient;
+    newItem.infirmier = this.infirmier;
 
+    // Call the api to create a new deplacement
     this.service.createDeplacement(newItem).subscribe(
       res => {
-        alert("Votre nouveau déplacement a bien été créé !")
+        alert("Votre nouveau déplacement a bien été créé !");
       }, err => {
         console.error(err)
       })
@@ -64,6 +71,5 @@ export class AddDeplacementPageComponent implements OnInit {
     // Remise à 0 du formulaire
     this.newDeplacement.reset();
   }
-
 
 }
