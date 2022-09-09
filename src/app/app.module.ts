@@ -12,6 +12,7 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { DeplacementPageComponent } from './components/deplacement-page/deplacement-page.component';
 import { GenericButtonComponent } from './components/generic-button/generic-button.component';
 import { GenericFieldsetPatientComponent } from './components/generic-fieldset-patient/generic-fieldset-patient.component';
+import { GenericFieldsetInfirmierComponent } from './components/generic-fieldset-infirmier/generic-fieldset-infirmier.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GenericFieldsetPatientComponent } from './components/generic-fieldset-p
     TitleBarComponent,
     DeplacementPageComponent,
     GenericButtonComponent,
-    GenericFieldsetPatientComponent
+    GenericFieldsetPatientComponent,
+    GenericFieldsetInfirmierComponent
   ],
   imports: [
     BrowserModule,

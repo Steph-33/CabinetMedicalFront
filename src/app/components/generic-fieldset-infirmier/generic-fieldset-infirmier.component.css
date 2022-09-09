@@ -1,0 +1,42 @@
+.activeClass {
+    background-color: #64a6f279;
+    box-shadow: 5px 5px #030C38;
+    border-color: #030C38;
+}
+
+.inactiveClass {
+    background-color: lightgray;
+    box-shadow: 5px 5px grey;
+    border-color: grey;
+}
+
+.infirmierField {
+    text-align: center;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.activeClassAll {
+    background-color: #64a6f279;
+    box-shadow: 5px 5px #030C38;
+    border-color: #030C38;
+}
+.activeClassAll:hover {
+    background-color: #030C38;
+    color: #64A6F2;
+    font-family: bold;
+    box-shadow: 5px 5px #64a6f279;
+    border-color: #64A6F2;
+}
+
+.inactiveClassAll {
+    background-color: lightgray;
+    box-shadow: 5px 5px grey;
+    border-color: grey;
+}
+.inactiveClassAll:hover {
+    background-color: grey;
+    box-shadow: 5px 5px lightgray;
+    font-family: bold;
+    border-color: lightgray;
+}
