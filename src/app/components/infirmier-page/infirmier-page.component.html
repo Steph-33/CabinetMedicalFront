@@ -1,51 +1,115 @@
 <div id="infirmierPage">
 
   <div id="allInfirmiers">
+    <app-generic-button (click)="toggleAllInfirmiers()" title="Afficher tous les infirmiers"></app-generic-button>
 
-    <button (click)="toggleAllInfirmiers()">Afficher tous les infirmiers</button>
-
-    <div [hidden]="hidden_all_infirmiers">
+    <div *ngIf="!hidden_all_infirmiers" id="hiddenPartAll">
       <div *ngFor="let infirmier of infirmiers">
-        <!--<div *ngIf="infirmier.active"> -->
-        <div>
-          <fieldset class="infirmierField" [ngClass]="{'activeClass': infirmier.active, 'inactiveClass': !infirmier.active}"><legend>{{infirmier.id}}</legend>
-            {{infirmier.nom}} {{infirmier.prenom}} <br/>
-            Téléphone Pro : {{infirmier.telPro}} <br/>
-            Téléphone Mobile : {{infirmier.telMobile}} <br/>
-            Téléphone Fixe : {{infirmier.telFixe}} <br/>
-          </fieldset>
+        <div class="field">
+          <app-generic-fieldset-infirmier type="all" [infirmier]="infirmier"></app-generic-fieldset-infirmier>
+          <div id="buttons">
+            <button class="deleteButton" (click)="deleteInfirmier(infirmier.id)">X</button>
+            <button class="activateButton" (click)="activeInfirmier(infirmier.id)">A</button>
+          </div>
         </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="displayBy">
+    <div id="byId">
+      <app-generic-button (click)="getInfirmierById(idInfirmier)" title="Afficher par id"></app-generic-button>
+
+      <select id="selectIdInfirmier" #idInfirmier>
+        <option>Choisir un id</option>
+        <option *ngFor="let item of infirmiers" value={{item.id}}>{{item.id}}</option>
+      </select>
+
+      <div [hidden]="hidden_by_id">
+        <app-generic-fieldset-infirmier type="byId" [infirmier]="infirmierId"></app-generic-fieldset-infirmier>
+      </div>
+    </div>
+
+    <div id="byName">
+      <app-generic-button (click)="getInfirmierByName(name)" title="Afficher par nom"></app-generic-button>
+         
+      <select id="selectNameInfirmier" #name>
+        <option>Choisir un nom</option>
+        <option *ngFor="let item of infirmiers" value={{item.nom}}>{{item.nom}}</option>
+      </select>
+
+      <div [hidden]="hidden_by_name">
+        <app-generic-fieldset-infirmier type="byName" [infirmier]="infirmierName"></app-generic-fieldset-infirmier>
       </div>
     </div>
   </div>
 
-  <div id="byId">
-    <button (click)="getInfirmierById(idInfirmier)">Afficher par id</button>
-    <input type="text" #idInfirmier />
+  <div id="createInfirmier">
+    <app-generic-button (click)="toggleInfirmier()" title="Créer un infirmier"></app-generic-button>
 
-    <div [hidden]="hidden_by_id">
-      <fieldset class="infirmierField" [ngClass]="{'activeClass': infirmierId.active, 'inactiveClass': !infirmierId.active}"><legend>{{infirmierId.id}}</legend>
-        {{infirmierId.nom}} {{infirmierId.prenom}} <br/>
-        Téléphone Pro : {{infirmierId.telPro}} <br/>
-        Téléphone Mobile : {{infirmierId.telMobile}} <br/>
-        Téléphone Fixe : {{infirmierId.telFixe}} <br/>
-      </fieldset>
+    <div [hidden]="hidden_create">
+      <form id="formNewInfirmier" [formGroup]="newInfirmierForm" (ngSubmit)="submitCreate()">
+        <div>
+          <label class="labelInForm">Nom : </label>
+          <input type="text" formControlName="nom"/>
+        </div>
+        <div>
+          <label class="labelInForm">Prenom : </label>
+          <input type="text" formControlName="prenom"/>
+        </div>
+        <div>
+          <label class="labelInForm">Téléphone Pro : </label>
+          <input type="text" formControlName="telFixe"/>
+        </div>
+        <div>
+          <label class="labelInForm">Téléphone Mobile : </label>
+          <input type="text" formControlName="telMobile"/>
+        </div>
+        <div>
+          <label class="labelInForm">Téléphone Fixe : </label>
+          <input type="text" formControlName="telFixe"/>
+        </div>
+        <button type="submit" [disabled]="!newInfirmierForm.valid">Valider</button>
+      </form>
+      
     </div>
-  </div>
 
-  <div id="byName">
-    <button (click)="getInfirmierByName(nameInfirmier)">Afficher par nom</button>
-    <input type="text" #nameInfirmier />
+    <div id="updateInfirmier">
+      <app-generic-button (click)="toggleUpdateInfirmier(idUpdateInfirmier)" title="Mettre à jour un infirmier"></app-generic-button>
+      
+      <select id="selectUpdateInfirmier" #idUpdateInfirmier>
+        <option>Choisir un nom</option>
+        <option *ngFor="let item of infirmiers" value={{item.id}}>{{item.nom}}</option>
+      </select>
 
-    <div [hidden]="hidden_by_name">
-      <fieldset class="infirmierField" [ngClass]="{'activeClass': infirmierName.active, 'inactiveClass': !infirmierName.active}"><legend>{{infirmierName.nom}}</legend>
-        {{infirmierName.prenom}} <br/>
-        Id: {{infirmierName.id}} <br/>
-        Téléphone Pro : {{infirmierName.telPro}} <br/>
-        Téléphone Mobile : {{infirmierName.telMobile}} <br/>
-        Téléphone Fixe : {{infirmierName.telFixe}} <br/>
-      </fieldset>
-    </div>
+      <div [hidden]="hidden_update">
+        <form id="formUpdateInfirmier" [formGroup]="updateInfirmierForm" (ngSubmit)="submitUpdate(idUpdateInfirmier)">
+          <div>
+            <label class="labelInForm">Nom : </label>
+            <input type="text" formControlName="nom"/>
+          </div>
+          <div>
+            <label class="labelInForm">Prenom : </label>
+            <input type="text" formControlName="prenom"/>
+          </div>
+          <div>
+            <label class="labelInForm">Téléphone Pro : </label>
+            <input type="text" formControlName="telFixe"/>
+          </div>
+          <div>
+            <label class="labelInForm">Téléphone Mobile : </label>
+            <input type="text" formControlName="telMobile"/>
+          </div>
+          <div>
+            <label class="labelInForm">Téléphone Fixe : </label>
+            <input type="text" formControlName="telFixe"/>
+          </div>
+          <button type="submit" [disabled]="!updateInfirmierForm.valid">Valider</button>
+        </form>
+
+      </div>
+
   </div>
 
 </div>

@@ -1,13 +1,21 @@
 #infirmierPage {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-top: 100px;
+    position: relative;
+    top: 3em;
+}
+
+#displayBy {
+    display: flex;
+    flex-direction: column;    
 }
 
 #byId {
     display: flex;
     flex-direction: column;
+    margin-bottom: 5em;
 }
 
 #byName {
@@ -15,10 +23,41 @@
     flex-direction: column;
 }
 
+#createInfirmier {
+    display: flex;
+    flex-direction: column;
+}
+
+#updateInfirmier {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+}
+
+#allInfirmiers {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#hiddenPartAll {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
 .infirmierField {
-    width: 25%;
     text-align: center;
     margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.infirmierField:hover {
+    border-color: #030C38;
 }
 
 button {
@@ -29,10 +68,42 @@ input {
     margin-bottom: 2em;
 }
 
-.activeClass {
-    background-color:lightcyan;
+#formNewInfirmier {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
 }
 
-.inactiveClass {
-    background-color: lightgray;
+.labelInForm {
+    padding-right: 1em;
+}
+
+#buttons {
+    margin-top: 0.5em;
+    margin-bottom: 2.5em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.deleteButton {
+    width: 4em;
+    height: 2em;
+    background-color: lightcoral;
+    color: white;
+    border-radius: 5px;
+}
+.deleteButton:hover {
+    background-color: red;
+}
+
+.activateButton {
+    width: 4em;
+    height: 2em;
+    background-color: rgba(144, 238, 144, 0.685);
+    border-radius: 5px;
+}
+.activateButton:hover {
+    background-color: rgb(71, 255, 47);
 }

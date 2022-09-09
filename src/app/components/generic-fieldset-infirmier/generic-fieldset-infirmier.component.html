@@ -1,0 +1,10 @@
+<fieldset class="infirmierField" [ngClass]="{'activeClass': infirmier.active && type != 'all', 'inactiveClass': !infirmier.active && type != 'all', 
+    'activeClassAll': infirmier.active && type == 'all', 'inactiveClassAll': !infirmier.active && type == 'all'}">
+  <legend *ngIf="type != 'byName'">{{infirmier.id}}</legend>
+  <legend *ngIf="type == 'byName'">{{infirmier.nom}}</legend>
+  <span *ngIf="type == 'byName'">Id : {{infirmier.id}}</span> <br/>
+  {{infirmier.nom}} {{infirmier.prenom}} <br/>
+  Téléphone Pro : {{infirmier.telPro}} <br/>
+  Téléphone Mobile : {{infirmier.telMobile}} <br/>
+  Téléphone Fixe : {{infirmier.telFixe}} <br/>
+</fieldset>
