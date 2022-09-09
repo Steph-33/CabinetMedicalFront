@@ -17,32 +17,11 @@ export class InfirmierPageComponent implements OnInit {
   hidden_all_infirmiers: boolean = true;
   hidden_by_id: boolean = true;
   hidden_by_name: boolean = true;
-  hidden_create: boolean = true;
-  hidden_update: boolean = true;
-
-  newInfirmierForm: FormGroup;
-  updateInfirmierForm: FormGroup;
 
   idParam!: string;
   nomPatParam!:string;
 
-  constructor(private service: InfirmierService) { 
-    this.newInfirmierForm = new FormGroup({
-      nom: new FormControl('', Validators.required),
-      prenom: new FormControl('', Validators.required),
-      telPro: new FormControl('', Validators.required),
-      telMobile: new FormControl('', Validators.required),
-      telFixe: new FormControl('', Validators.required),
-
-    })
-    this.updateInfirmierForm = new FormGroup({
-      nom: new FormControl('', Validators.required),
-      prenom: new FormControl('', Validators.required),
-      telPro: new FormControl('', Validators.required),
-      telMobile: new FormControl('', Validators.required),
-      telFixe: new FormControl('', Validators.required),
-    })
-  }
+  constructor(private service: InfirmierService) {   }
 
   ngOnInit(): void {
     this.getInfirmiers();
@@ -98,27 +77,6 @@ export class InfirmierPageComponent implements OnInit {
       name.value='';
     }
   }
-
-  submitCreate(): void {
-    let newItem = new Infirmier();
-      newItem.nom = this.newInfirmierForm.controls['nom'].value;
-      newItem.prenom = this.newInfirmierForm.controls['prenom'].value;
-      newItem.telPro = this.newInfirmierForm.controls['telPro'].value;
-      newItem.telMobile = this.newInfirmierForm.controls['telMobile'].value;
-      newItem.telFixe = this.newInfirmierForm.controls['telFixe'].value;
-      newItem.active = true;
-
-    this.service.createInfirmier(newItem).subscribe(
-      res => {
-        this.getInfirmiers()
-      }, err => {
-        console.error(err)
-      })
-
-      // Remise à 0 du formulaire
-    this.newInfirmierForm.reset();
-    this.hidden_create = true;
-  }
   
   deleteInfirmier(id: string|undefined): void {
     this.service.deleteInfirmier(id).subscribe(
@@ -140,52 +98,6 @@ export class InfirmierPageComponent implements OnInit {
           console.error(err);
       } 
     )
-  }
-
-  submitUpdate(idUpdatedInfirmier: HTMLSelectElement): void {
-    let newItem = new Infirmier();
-      newItem.nom = this.updateInfirmierForm.controls['nom'].value;
-      newItem.prenom = this.updateInfirmierForm.controls['prenom'].value;
-      newItem.telPro = this.updateInfirmierForm.controls['telPro'].value;
-      newItem.telMobile = this.updateInfirmierForm.controls['telMobile'].value;
-      newItem.telFixe = this.updateInfirmierForm.controls['telFixe'].value;
-      newItem.active = true;
-
-    this.service.updateInfirmier(idUpdatedInfirmier.value, newItem).subscribe(
-      ok => {
-        this.getInfirmiers()
-      },
-        err => {
-          console.error(err)
-      }
-    );
-    // Remise à 0 du formulaire
-    this.updateInfirmierForm.reset();
-    idUpdatedInfirmier.value = '';
-  }
-
-  toggleInfirmier(): void { 
-    this.hidden_create = !this.hidden_create;
-  }
-  
-  toggleUpdateInfirmier(idUpdatedInfirmier: HTMLSelectElement): void {
-
-    if (idUpdatedInfirmier.value == 'Choisir un nom') {
-      alert("Nom invalide");
-      this.hidden_update = true;  
-    } else {
-      this.service.getInfirmierById(idUpdatedInfirmier.value).subscribe((res:Infirmier) => {
-        this.updateInfirmierForm.controls['nom'].setValue(res.nom);
-        this.updateInfirmierForm.controls['prenom'].setValue(res.prenom);
-        this.updateInfirmierForm.controls['telPro'].setValue(res.telPro);
-        this.updateInfirmierForm.controls['telMobile'].setValue(res.telMobile);
-        this.updateInfirmierForm.controls['telFixe'].setValue(res.telFixe);
-        this.hidden_update = false;
-      },
-      (err: any) => {
-        console.error(err);
-      })
-    }
   }
 
   toggleAllInfirmiers(): void {

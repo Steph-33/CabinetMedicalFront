@@ -41,7 +41,7 @@ export class InfirmierService {
   }
 
   activateInfirmier = (id: string|undefined) => {
-    return this.http.patch(`${this.domaine}/infirmiers/act-ive/${id}`, "");
+    return this.http.patch(`${this.domaine}/infirmiers/active/${id}`, "");
   }
 
   updateInfirmier : (id:string, item: Infirmier) => Observable<Infirmier> = (id:string, item: Infirmier) => {
