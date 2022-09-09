@@ -20,18 +20,9 @@ export class PatientPageComponent implements OnInit {
   hidden_create: boolean = true;
   hidden_update: boolean = true;
 
-  newPatientForm: FormGroup;
   updatePatientForm: FormGroup;
 
   constructor(private service: PatientService) { 
-    this.newPatientForm = new FormGroup({
-      nom: new FormControl('', Validators.required),
-      prenom: new FormControl('', Validators.required),
-      sexe: new FormControl('', [Validators.required, Validators.pattern('F|M')]),
-      dateNaissance: new FormControl('', [Validators.required, Validators.pattern('[0-3][0-9]/[0-1][0-9]/[1-2][0-9][0-9][0-9]')]),
-      adresse: new FormControl('', Validators.required),
-      numSecu: new FormControl('', [Validators.required, Validators.pattern('[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9] [0-9][0-9]')])
-    })
     this.updatePatientForm = new FormGroup({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
@@ -49,6 +40,7 @@ export class PatientPageComponent implements OnInit {
   getPatients = () => {
     // @ts-ignore
     this.service.getAllPatients().subscribe((res: any) => {
+      console.log(res);
       this.patients = res},
       (err: any) => {
         console.error(err)
@@ -97,25 +89,15 @@ export class PatientPageComponent implements OnInit {
     }
   }
 
-  submitCreate(): void {
-    let newItem = new Patient();
-      newItem.nomPatient = this.newPatientForm.controls['nom'].value;
-      newItem.prenomPatient = this.newPatientForm.controls['prenom'].value;
-      newItem.dateNaissance = this.newPatientForm.controls['dateNaissance'].value;
-      newItem.sexe = this.newPatientForm.controls['sexe'].value;
-      newItem.adresse = this.newPatientForm.controls['adresse'].value;
-      newItem.numeroSecu = this.newPatientForm.controls['numSecu'].value;
-      newItem.active = true;
-
-    this.service.createPatient(newItem).subscribe(
+  submitCreate(item: Patient): void {
+    this.service.createPatient(item).subscribe(
       res => {
         this.getPatients()
       }, err => {
         console.error(err)
       })
 
-      // Remise à 0 du formulaire
-    this.newPatientForm.reset();
+    // Remise à 0 du formulaire
     this.hidden_create = true;
   }
   
@@ -162,12 +144,22 @@ export class PatientPageComponent implements OnInit {
     // Remise à 0 du formulaire
     this.updatePatientForm.reset();
     idUpdatedPatient.value = '';
+    this.hidden_update = true;
   }
 
   togglePatient(): void { 
     this.hidden_create = !this.hidden_create;
   }
   
+  // toggleUpdatePatient(idUpdatedPatient: HTMLSelectElement): void {
+  //   if (idUpdatedPatient.value == 'Choisir un nom') {
+  //     alert("Nom invalide");
+  //     this.hidden_update = true; 
+  //   } else {
+  //        this.getPatientById(idUpdatedPatient);
+  //   }
+  // }
+
   toggleUpdatePatient(idUpdatedPatient: HTMLSelectElement): void {
 
     if (idUpdatedPatient.value == 'Choisir un nom') {
