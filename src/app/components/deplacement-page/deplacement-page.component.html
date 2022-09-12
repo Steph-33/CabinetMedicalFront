@@ -28,13 +28,15 @@
 
         <div id="byPatientAndInfirmier">
             <app-generic-button (click)="getDeplacementsByPatientAndInfirmier(idPatientAndI, idInfirmierAndP)"
-                title="Déplacements par Patient et par Infirmier"></app-generic-button>
+                title="Déplacements par Patient et Infirmier"></app-generic-button>
 
+            <label>Infirmier</label>
             <select #idInfirmierAndP (change)="getPatientsInfirmier(idInfirmierAndP.value)">
                 <option>Choisir le nom de l'infirmier</option>
                 <option *ngFor="let infirmier of infirmiers" value={{infirmier.id}}>{{infirmier.nom}}
                     {{infirmier.prenom}}</option>
             </select>
+            <label>Patient</label>
             <select #idPatientAndI>
                 <option>Choisir le nom du patient</option>
                 <option *ngFor="let patient of infirmiersPatient" value={{patient.id}}>{{patient.nomPatient}}

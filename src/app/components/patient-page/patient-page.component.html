@@ -91,6 +91,12 @@
             <label class="labelInForm">Numéro de sécu : </label>
             <input type="text" formControlName="numSecu" />
           </div>
+          <div>
+            <label class="labelInForm">Infirmier(e) : </label>
+            <select #refNomInf formControlName="infirmier" (change)="getInfirmierById(refNomInf.value)">
+              <option *ngFor="let inf of infirmiers" value={{inf.id}}>{{inf.nom}} {{inf.prenom}}</option>
+            </select>
+          </div>
           <button type="submit" [disabled]="!updatePatientForm.valid">Valider</button>
         </form>
       </div>
